@@ -1,12 +1,11 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import SearchBar from '@/components/SearchBar';
 import FilterPanel from '@/components/FilterPanel';
 import BiomaterialCard from '@/components/BiomaterialCard';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
-import { SearchFilters, Biomaterial } from '@/types/biomaterial';
+import { SearchFilters } from '@/types/biomaterial';
 import { sampleBiomaterials } from '@/data/biomaterials';
 import { Search, Beaker, Shield, Recycle } from 'lucide-react';
 

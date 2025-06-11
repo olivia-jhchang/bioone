@@ -13,7 +13,7 @@ interface FilterPanelProps {
 }
 
 export default function FilterPanel({ filters, onFilterChange, isOpen, onToggle }: FilterPanelProps) {
-  const updateFilter = (key: keyof SearchFilters, value: any) => {
+  const updateFilter = (key: keyof SearchFilters, value: string | boolean | string[] | undefined) => {
     onFilterChange({ ...filters, [key]: value });
   };
 

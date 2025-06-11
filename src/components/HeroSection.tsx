@@ -1,25 +1,29 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Search, Bot, ChevronLeft, ChevronRight } from 'lucide-react';
+import SearchBar from './SearchBar';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface HeroSectionProps {
   onSearch: (query: string) => void;
 }
 
 export default function HeroSection({ onSearch }: HeroSectionProps) {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [currentSuggestion, setCurrentSuggestion] = useState(0);
+  
+  const suggestions = [
+    "접일 예시",
+    "유전자 편집이 위 한 배양배로수",
+    "고온에서 견디는 인체에 무해한 플라스틱"
+  ];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSearch(searchQuery);
+  const nextSuggestion = () => {
+    setCurrentSuggestion((prev) => (prev + 1) % suggestions.length);
   };
 
-  const searchSuggestions = [
-    '접일 예시',
-    '유전자 편집이 위한 배양배로수', 
-    '고온에서 견디는 인체에 무해한 플라스틱'
-  ];
+  const prevSuggestion = () => {
+    setCurrentSuggestion((prev) => (prev - 1 + suggestions.length) % suggestions.length);
+  };
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 overflow-hidden">
@@ -69,50 +73,29 @@ export default function HeroSection({ onSearch }: HeroSectionProps) {
 
         {/* Search section */}
         <div className="w-full max-w-4xl mb-8">
-          <form onSubmit={handleSubmit} className="relative mb-6">
-            <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="어떤 소재를 찾고 계신가요?"
-                className="w-full px-6 py-4 pr-32 text-gray-800 text-lg bg-transparent rounded-2xl outline-none placeholder-gray-500"
-              />
-              <div className="absolute right-2 top-2 flex space-x-2">
-                <button
-                  type="submit"
-                  className="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-xl flex items-center justify-center transition-colors"
-                >
-                  <Search className="w-5 h-5 text-white" />
-                </button>
-                <button
-                  type="button"
-                  className="w-12 h-12 bg-cyan-500 hover:bg-cyan-600 rounded-xl flex items-center justify-center transition-colors"
-                >
-                  <Bot className="w-5 h-5 text-white" />
-                </button>
-              </div>
-              <div className="absolute right-24 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
-                AI Search
-              </div>
-            </div>
-          </form>
-
+          <SearchBar 
+            onSearch={onSearch}
+            className="mb-6"
+          />
+          
           {/* Search suggestions carousel */}
           <div className="relative">
             <div className="flex items-center justify-center space-x-4">
-              <button className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors">
+              <button
+                onClick={prevSuggestion}
+                className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors"
+              >
                 <ChevronLeft className="w-4 h-4 text-white" />
               </button>
               
               <div className="flex space-x-3">
-                {searchSuggestions.map((suggestion, index) => (
+                {suggestions.map((suggestion, index) => (
                   <button
                     key={index}
-                    onClick={() => setSearchQuery(suggestion)}
+                    onClick={() => onSearch(suggestion)}
                     className={`px-4 py-2 rounded-full text-sm transition-colors ${
-                      index === 0 
-                        ? 'bg-purple-600 text-white' 
+                      index === currentSuggestion
+                        ? 'bg-purple-600 text-white'
                         : 'bg-white/20 text-white hover:bg-white/30'
                     }`}
                   >
@@ -120,8 +103,11 @@ export default function HeroSection({ onSearch }: HeroSectionProps) {
                   </button>
                 ))}
               </div>
-
-              <button className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors">
+              
+              <button
+                onClick={nextSuggestion}
+                className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors"
+              >
                 <ChevronRight className="w-4 h-4 text-white" />
               </button>
             </div>
