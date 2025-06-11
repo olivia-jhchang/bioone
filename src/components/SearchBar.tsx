@@ -15,10 +15,19 @@ export default function SearchBar({
   className = ""
 }: SearchBarProps) {
   const [query, setQuery] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch(query);
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
   };
 
   return (
@@ -34,7 +43,9 @@ export default function SearchBar({
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder={placeholder}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            placeholder={isFocused ? "" : placeholder}
             className="w-full px-[15px] py-[25px] text-[22px] font-bold text-[#333333] bg-transparent rounded-tl-[10px] rounded-tr-[10px] rounded-bl-[10px] rounded-br-[40px] outline-none placeholder-[#333333]/60"
             style={{ fontFamily: 'Pretendard, sans-serif' }}
           />

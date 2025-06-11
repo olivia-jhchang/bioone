@@ -1524,9 +1524,16 @@ var _s = __turbopack_context__.k.signature();
 function SearchBar({ onSearch, placeholder = "어떤 소재를 찾고 계신가요?", className = "" }) {
     _s();
     const [query, setQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const [isFocused, setIsFocused] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const handleSubmit = (e)=>{
         e.preventDefault();
         onSearch(query);
+    };
+    const handleFocus = ()=>{
+        setIsFocused(true);
+    };
+    const handleBlur = ()=>{
+        setIsFocused(false);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
         onSubmit: handleSubmit,
@@ -1538,7 +1545,7 @@ function SearchBar({ onSearch, placeholder = "어떤 소재를 찾고 계신가�
                     className: "absolute inset-[-10px] border-[10px] border-white/20 rounded-tl-[20px] rounded-tr-[20px] rounded-bl-[20px] rounded-br-[50px] pointer-events-none"
                 }, void 0, false, {
                     fileName: "[project]/src/components/SearchBar.tsx",
-                    lineNumber: 29,
+                    lineNumber: 38,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1548,14 +1555,16 @@ function SearchBar({ onSearch, placeholder = "어떤 소재를 찾고 계신가�
                             type: "text",
                             value: query,
                             onChange: (e)=>setQuery(e.target.value),
-                            placeholder: placeholder,
+                            onFocus: handleFocus,
+                            onBlur: handleBlur,
+                            placeholder: isFocused ? "" : placeholder,
                             className: "w-full px-[15px] py-[25px] text-[22px] font-bold text-[#333333] bg-transparent rounded-tl-[10px] rounded-tr-[10px] rounded-bl-[10px] rounded-br-[40px] outline-none placeholder-[#333333]/60",
                             style: {
                                 fontFamily: 'Pretendard, sans-serif'
                             }
                         }, void 0, false, {
                             fileName: "[project]/src/components/SearchBar.tsx",
-                            lineNumber: 33,
+                            lineNumber: 42,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1572,7 +1581,7 @@ function SearchBar({ onSearch, placeholder = "어떤 소재를 찾고 계신가�
                                             children: "AI"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SearchBar.tsx",
-                                            lineNumber: 45,
+                                            lineNumber: 56,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1580,13 +1589,13 @@ function SearchBar({ onSearch, placeholder = "어떤 소재를 찾고 계신가�
                                             children: " Search"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/SearchBar.tsx",
-                                            lineNumber: 46,
+                                            lineNumber: 57,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/SearchBar.tsx",
-                                    lineNumber: 44,
+                                    lineNumber: 55,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1596,39 +1605,39 @@ function SearchBar({ onSearch, placeholder = "어떤 소재를 찾고 계신가�
                                         className: "w-5 h-5 text-white"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/SearchBar.tsx",
-                                        lineNumber: 52,
+                                        lineNumber: 63,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/SearchBar.tsx",
-                                    lineNumber: 48,
+                                    lineNumber: 59,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/SearchBar.tsx",
-                            lineNumber: 43,
+                            lineNumber: 54,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/SearchBar.tsx",
-                    lineNumber: 32,
+                    lineNumber: 41,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/SearchBar.tsx",
-            lineNumber: 27,
+            lineNumber: 36,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/SearchBar.tsx",
-        lineNumber: 25,
+        lineNumber: 34,
         columnNumber: 5
     }, this);
 }
-_s(SearchBar, "qO/HZodsWTfJhuzZtdaxiosei2U=");
+_s(SearchBar, "cIHf1AWaxBRq/H6opNOtiMDSIF4=");
 _c = SearchBar;
 var _c;
 __turbopack_context__.k.register(_c, "SearchBar");
