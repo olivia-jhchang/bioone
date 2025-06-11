@@ -200,7 +200,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">BioOne</h3>
+              <h3 className="text-lg font-semibold mb-4">All in One</h3>
               <p className="text-gray-300">
                 바이오소재 분야의 혁신을 이끌어가는 검색 플랫폼입니다.
               </p>
@@ -222,7 +222,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 BioOne. All rights reserved.</p>
+            <p>&copy; 2024 All in One. All rights reserved.</p>
           </div>
         </div>
       </footer>

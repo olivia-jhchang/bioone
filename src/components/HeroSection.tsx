@@ -58,13 +58,13 @@ export default function HeroSection({ onSearch }: HeroSectionProps) {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center text-white">
         {/* Logo and title */}
         <div className="mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mr-4 backdrop-blur-sm">
-              <span className="text-white font-bold text-2xl">B</span>
-            </div>
-            <h1 className="text-5xl font-bold">BioOne</h1>
+                  <div className="flex items-center justify-center mb-4">
+          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mr-4 backdrop-blur-sm">
+            <span className="text-white font-bold text-2xl">A</span>
           </div>
-          <h2 className="text-3xl font-medium mb-4">바이오소재 정보 AI 통합플랫폼</h2>
+          <h1 className="text-5xl font-bold">All in One</h1>
+        </div>
+        <h2 className="text-3xl font-medium mb-4">바이오소재 정보 AI 통합플랫폼</h2>
         </div>
 
         {/* Search section */}

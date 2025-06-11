@@ -11,9 +11,9 @@ export default function Header() {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">B</span>
+              <span className="text-white font-bold text-sm">A</span>
             </div>
-            <span className="text-white text-xl font-bold">BioOne</span>
+            <span className="text-white text-xl font-bold">All in One</span>
           </div>
 
           {/* Right side menu */}

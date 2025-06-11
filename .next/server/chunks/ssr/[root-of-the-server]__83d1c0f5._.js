@@ -1337,7 +1337,7 @@ function Header() {
                                 className: "w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     className: "text-white font-bold text-sm",
-                                    children: "B"
+                                    children: "A"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Header.tsx",
                                     lineNumber: 14,
@@ -1350,7 +1350,7 @@ function Header() {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "text-white text-xl font-bold",
-                                children: "BioOne"
+                                children: "All in One"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Header.tsx",
                                 lineNumber: 16,
@@ -1650,30 +1650,30 @@ function HeroSection({ onSearch }) {
                                         className: "w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mr-4 backdrop-blur-sm",
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             className: "text-white font-bold text-2xl",
-                                            children: "B"
+                                            children: "A"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/HeroSection.tsx",
                                             lineNumber: 63,
-                                            columnNumber: 15
+                                            columnNumber: 13
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/HeroSection.tsx",
                                         lineNumber: 62,
-                                        columnNumber: 13
+                                        columnNumber: 11
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                                         className: "text-5xl font-bold",
-                                        children: "BioOne"
+                                        children: "All in One"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/HeroSection.tsx",
                                         lineNumber: 65,
-                                        columnNumber: 13
+                                        columnNumber: 11
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/HeroSection.tsx",
                                 lineNumber: 61,
-                                columnNumber: 11
+                                columnNumber: 19
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                 className: "text-3xl font-medium mb-4",
@@ -1681,7 +1681,7 @@ function HeroSection({ onSearch }) {
                             }, void 0, false, {
                                 fileName: "[project]/src/components/HeroSection.tsx",
                                 lineNumber: 67,
-                                columnNumber: 11
+                                columnNumber: 9
                             }, this)
                         ]
                     }, void 0, true, {
@@ -2328,7 +2328,7 @@ function Home() {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                             className: "text-lg font-semibold mb-4",
-                                            children: "BioOne"
+                                            children: "All in One"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
                                             lineNumber: 203,
@@ -2434,7 +2434,7 @@ function Home() {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "border-t border-gray-700 mt-8 pt-8 text-center text-gray-400",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                children: "© 2024 BioOne. All rights reserved."
+                                children: "© 2024 All in One. All rights reserved."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.tsx",
                                 lineNumber: 225,
