@@ -1,37 +1,37 @@
 {
   "pages": {
     "/_not-found/page": [
-      "static/chunks/webpack-f029a09104d09cbc.js",
+      "static/chunks/webpack-29ebadaebe2fcb3f.js",
       "static/chunks/4bd1b696-d1df770a52915852.js",
       "static/chunks/684-e3d71baf289cc55c.js",
       "static/chunks/main-app-6b7e0b226face243.js",
       "static/chunks/app/_not-found/page-a5650ad2caef29f7.js"
     ],
-    "/layout": [
-      "static/chunks/webpack-f029a09104d09cbc.js",
-      "static/chunks/4bd1b696-d1df770a52915852.js",
-      "static/chunks/684-e3d71baf289cc55c.js",
-      "static/chunks/main-app-6b7e0b226face243.js",
-      "static/css/814cf05353f254a5.css",
-      "static/chunks/app/layout-45f3bf4f1bec279e.js"
-    ],
     "/api/crawl-bioone/route": [
-      "static/chunks/webpack-f029a09104d09cbc.js",
+      "static/chunks/webpack-29ebadaebe2fcb3f.js",
       "static/chunks/4bd1b696-d1df770a52915852.js",
       "static/chunks/684-e3d71baf289cc55c.js",
       "static/chunks/main-app-6b7e0b226face243.js",
       "static/chunks/app/api/crawl-bioone/route-bbe7e43341433675.js"
     ],
-    "/page": [
-      "static/chunks/webpack-f029a09104d09cbc.js",
+    "/layout": [
+      "static/chunks/webpack-29ebadaebe2fcb3f.js",
       "static/chunks/4bd1b696-d1df770a52915852.js",
       "static/chunks/684-e3d71baf289cc55c.js",
       "static/chunks/main-app-6b7e0b226face243.js",
-      "static/chunks/563-a6eef89cfcfc7b8e.js",
-      "static/chunks/app/page-1f69282907bfc2a2.js"
+      "static/css/fe9dcc3fdfc0fb24.css",
+      "static/chunks/app/layout-45f3bf4f1bec279e.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-29ebadaebe2fcb3f.js",
+      "static/chunks/4bd1b696-d1df770a52915852.js",
+      "static/chunks/684-e3d71baf289cc55c.js",
+      "static/chunks/main-app-6b7e0b226face243.js",
+      "static/chunks/778-1810aa114b089867.js",
+      "static/chunks/app/page-6e75d97aa2141b2d.js"
     ],
     "/test/page": [
-      "static/chunks/webpack-f029a09104d09cbc.js",
+      "static/chunks/webpack-29ebadaebe2fcb3f.js",
       "static/chunks/4bd1b696-d1df770a52915852.js",
       "static/chunks/684-e3d71baf289cc55c.js",
       "static/chunks/main-app-6b7e0b226face243.js",

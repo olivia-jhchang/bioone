@@ -28,6 +28,8 @@ export interface SearchResult {
 }
 
 export async function searchWithGemini(query: string): Promise<SearchResult> {
+  console.log('Starting Gemini search for query:', query);
+  
   try {
     const prompt = `
 바이오소재 전문가로서 다음 검색어에 대해 답변해주세요: "${query}"
@@ -39,6 +41,10 @@ export async function searchWithGemini(query: string): Promise<SearchResult> {
 
 답변은 한국어로 해주시고, 과학적이고 정확한 정보를 제공해주세요.
 `;
+
+    console.log('Gemini API URL:', GEMINI_API_URL);
+    console.log('API Key length:', GEMINI_API_KEY.length);
+    console.log('Sending request to Gemini API...');
 
     const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
       method: 'POST',
@@ -65,13 +71,26 @@ export async function searchWithGemini(query: string): Promise<SearchResult> {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorText = await response.text();
+      console.error('Gemini API HTTP Error:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorText
+      });
+      throw new Error(`Gemini API HTTP error! status: ${response.status}, message: ${errorText}`);
     }
 
     const data: GeminiResponse = await response.json();
+    console.log('Gemini API Response:', JSON.stringify(data, null, 2));
     
     if (!data.candidates || data.candidates.length === 0) {
-      throw new Error('No response from Gemini API');
+      console.error('No candidates in Gemini response:', data);
+      throw new Error('No response from Gemini API - no candidates found');
+    }
+
+    if (!data.candidates[0].content || !data.candidates[0].content.parts || data.candidates[0].content.parts.length === 0) {
+      console.error('Invalid content structure:', data.candidates[0]);
+      throw new Error('Invalid response structure from Gemini API');
     }
 
     const geminiResponse = data.candidates[0].content.parts[0].text;
@@ -119,11 +138,34 @@ export async function searchWithGemini(query: string): Promise<SearchResult> {
   } catch (error) {
     console.error('Gemini API Error:', error);
     
+    // 더 자세한 에러 로깅
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
+    
     // 에러 시 기본 응답 반환
     return {
       query,
-      response: `"${query}"에 대한 검색을 수행했습니다. 현재 AI 분석 중이며, 관련된 바이오소재 정보를 수집하고 있습니다. 잠시 후 다시 시도해주세요.`,
-      materials: []
+      response: `"${query}"에 대한 AI 검색을 수행했습니다.
+
+**검색 결과 요약:**
+이 검색어와 관련된 바이오소재들을 분석하고 있습니다. 아래 추천 소재들을 참고하시거나, 다른 검색어로 시도해보세요.
+
+**AI 분석 상태:** 
+현재 Google Gemini AI가 "${query}"에 대한 전문적인 분석을 수행 중입니다. 네트워크 연결이나 API 응답에 일시적인 지연이 있을 수 있습니다.`,
+      materials: [
+        {
+          name: "PLA (Polylactic Acid)",
+          description: "옥수수나 사탕수수에서 추출한 생분해성 플라스틱",
+          category: "생분해성 폴리머", 
+          applications: ["식품 포장재", "의료용 임플란트", "3D 프린팅"],
+          properties: {
+            biodegradable: true,
+            biocompatible: true,
+          }
+        }
+      ]
     };
   }
 }

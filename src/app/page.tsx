@@ -78,26 +78,45 @@ export default function Home() {
       setIsLoadingBioOne(true);
       
       try {
+        console.log('Starting search for:', query);
+        
         // AI 검색과 BioOne 크롤링 병렬 실행
-        const [aiResult, bioOneResult] = await Promise.all([
+        const [aiResult, bioOneResult] = await Promise.allSettled([
           searchWithGemini(query),
           searchBioOne(query)
         ]);
         
-        setAiResult(aiResult);
+        // AI 검색 결과 처리
+        if (aiResult.status === 'fulfilled') {
+          console.log('AI search successful:', aiResult.value);
+          setAiResult(aiResult.value);
+        } else {
+          console.error('AI search failed:', aiResult.reason);
+          // AI 검색 실패 시에도 기본 결과 제공
+          setAiResult({
+            query,
+            response: `"${query}"에 대한 AI 검색에서 일시적인 문제가 발생했습니다. 아래 검색 결과를 확인해주세요.`,
+            materials: []
+          });
+        }
         
-        // BioOne 검색 결과를 Biomaterial 형식으로 변환
-        if (bioOneResult.success && bioOneResult.data.length > 0) {
-          const convertedMaterials = bioOneResult.data.map(convertBioOneTobiomaterial);
+        // BioOne 검색 결과 처리
+        if (bioOneResult.status === 'fulfilled' && bioOneResult.value.success && bioOneResult.value.data.length > 0) {
+          const convertedMaterials = bioOneResult.value.data.map(convertBioOneTobiomaterial);
           setBioOneMaterials(convertedMaterials);
           console.log(`BioOne에서 ${convertedMaterials.length}개 소재 발견`);
         } else {
+          console.error('BioOne search failed:', bioOneResult.status === 'rejected' ? bioOneResult.reason : 'No results');
           setBioOneMaterials([]);
         }
         
       } catch (error) {
-        console.error('검색 중 오류 발생:', error);
-        setAiResult(null);
+        console.error('검색 중 예상치 못한 오류 발생:', error);
+        setAiResult({
+          query,
+          response: `"${query}"에 대한 검색 중 오류가 발생했습니다. 다시 시도해주세요.`,
+          materials: []
+        });
         setBioOneMaterials([]);
       } finally {
         setIsAiLoading(false);
