@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Globe, User, Menu } from 'lucide-react';
 
 export default function Header() {
@@ -9,12 +10,12 @@ export default function Header() {
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity cursor-pointer">
             <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">A</span>
             </div>
             <span className="text-white text-xl font-bold">All in One</span>
-          </div>
+          </Link>
 
           {/* Right side menu */}
           <div className="flex items-center space-x-4">
