@@ -106,56 +106,47 @@ export default function Home() {
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
     setShowResults(true);
-    
-    // AI 검색 시작
+    setBioOneMaterials([]);
+    setAiResult(null);
+
     if (query.trim()) {
-      setIsAiLoading(true);
       setIsLoadingBioOne(true);
-      
+      setIsAiLoading(true);
+
       try {
-        console.log('Starting search for:', query);
-        
-        // AI 검색과 BioOne 크롤링 병렬 실행
-        const [aiResult, bioOneResult] = await Promise.allSettled([
-          searchWithGemini(query),
-          searchBioOne(query)
-        ]);
-        
-        // AI 검색 결과 처리
-        if (aiResult.status === 'fulfilled') {
-          console.log('AI search successful:', aiResult.value);
-          setAiResult(aiResult.value);
-        } else {
-          console.error('AI search failed:', aiResult.reason);
-          // AI 검색 실패 시에도 기본 결과 제공
-          setAiResult({
-            query,
-            response: `"${query}"에 대한 AI 검색에서 일시적인 문제가 발생했습니다. 아래 검색 결과를 확인해주세요.`,
-            materials: []
-          });
-        }
-        
-        // BioOne 검색 결과 처리
-        if (bioOneResult.status === 'fulfilled' && bioOneResult.value.success && bioOneResult.value.data.length > 0) {
-          const convertedMaterials = bioOneResult.value.data.map(convertBioOneTobiomaterial);
+        console.log('1. Starting BioOne crawling for:', query);
+        const bioOneResult = await searchBioOne(query);
+
+        let convertedMaterials: Biomaterial[] = [];
+        if (bioOneResult.success && bioOneResult.data.length > 0) {
+          convertedMaterials = bioOneResult.data.map(convertBioOneTobiomaterial);
           setBioOneMaterials(convertedMaterials);
-          console.log(`BioOne에서 ${convertedMaterials.length}개 소재 발견`);
+          console.log(`2. BioOne crawling successful: ${convertedMaterials.length} items found.`);
         } else {
-          console.error('BioOne search failed:', bioOneResult.status === 'rejected' ? bioOneResult.reason : 'No results');
           setBioOneMaterials([]);
+          console.log('2. BioOne crawling returned no results.');
         }
-        
+        setIsLoadingBioOne(false);
+
+        const contextForAI = JSON.stringify(bioOneResult.data, null, 2);
+        console.log('3. Sending crawled context to Gemini AI.');
+        const aiSummaryResult = await searchWithGemini(query, contextForAI);
+
+        setAiResult(aiSummaryResult);
+        console.log('4. AI summary generation successful.');
+
       } catch (error) {
-        console.error('검색 중 예상치 못한 오류 발생:', error);
+        console.error('Search pipeline failed:', error);
         setAiResult({
           query,
-          response: `"${query}"에 대한 검색 중 오류가 발생했습니다. 다시 시도해주세요.`,
+          response: `"${query}"에 대한 검색 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.`,
           materials: []
         });
         setBioOneMaterials([]);
       } finally {
-        setIsAiLoading(false);
         setIsLoadingBioOne(false);
+        setIsAiLoading(false);
+        console.log('5. Search pipeline finished.');
       }
     } else {
       setAiResult(null);

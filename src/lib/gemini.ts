@@ -74,30 +74,29 @@ function getRelevantFallbackMaterials(query: string) {
   ];
 }
 
-export async function searchWithGemini(query: string): Promise<SearchResult> {
-  console.log('Starting Gemini search for query:', query);
+export async function searchWithGemini(query: string, crawledContext: string): Promise<SearchResult> {
+  console.log('Starting RAG-based Gemini search for query:', query);
   
   try {
     const prompt = `
-바이오소재 및 생명과학 전문가로서 다음 검색어에 대해 답변해주세요: "${query}"
+당신은 바이오소재 및 생명과학 분야의 전문 AI 어시스턴트입니다.
+사용자가 "${query}"(으)로 검색하여 얻은 실시간 검색 결과를 아래 [크롤링된 컨텍스트]에 제공합니다.
+이 컨텍스트만을 기반으로 답변을 생성해주세요.
 
-다음 형식으로 답변해주세요:
-1. 검색어에 대한 전문적인 설명 (2-3문장)
-2. 관련된 바이오소재들과 특성
-3. 응용 분야 및 활용 방안
+[크롤링된 컨텍스트]
+${crawledContext}
+[크롤링된 컨텍스트 끝]
 
-검색어가 다음과 관련된 경우 해당 분야에 특화된 정보를 제공해주세요:
-- 배양세포주: HeLa, CHO, HEK293, iPSC 등의 세포주와 특성
-- 생체재료: 콜라겐, 키토산, 하이드로겔 등의 특성과 응용
-- 생분해성 재료: PLA, PCL 등의 특성과 분해 메커니즘
-- 바이오세라믹: 하이드록시아파타이트 등의 특성
+다음 작업들을 수행해주세요:
+1.  **핵심 요약**: 제공된 컨텍스트를 바탕으로 "${query}"에 대한 핵심 내용을 2~3문장으로 요약해주세요.
+2.  **주요 소재 식별**: 컨텍스트에서 언급된 주요 바이오소재를 최대 3개까지 식별하고, 각 소재의 이름과 설명을 목록으로 만들어주세요.
+3.  **주요 응용 분야**: 컨텍스트에서 찾아낸 가장 중요한 응용 분야들을 나열해주세요.
 
-답변은 한국어로 해주시고, 과학적이고 정확한 정보를 제공해주세요.
+만약 컨텍스트가 비어 있거나 관련 정보가 없다면, "제공된 정보 내에서 '${query}'에 대한 유의미한 결과를 찾을 수 없었습니다."라고 답변해주세요.
+모든 답변은 반드시 한국어로 작성해야 합니다.
 `;
 
-    console.log('Gemini API URL:', GEMINI_API_URL);
-    console.log('API Key length:', GEMINI_API_KEY.length);
-    console.log('Sending request to Gemini API...');
+    console.log('Sending RAG prompt to Gemini API...');
 
     const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
       method: 'POST',
@@ -115,7 +114,7 @@ export async function searchWithGemini(query: string): Promise<SearchResult> {
           }
         ],
         generationConfig: {
-          temperature: 0.7,
+          temperature: 0.5,
           topK: 40,
           topP: 0.95,
           maxOutputTokens: 1024,
@@ -148,46 +147,14 @@ export async function searchWithGemini(query: string): Promise<SearchResult> {
 
     const geminiResponse = data.candidates[0].content.parts[0].text;
 
-    // 응답에서 관련 소재들을 추출하여 구조화 (실제로는 더 정교한 파싱 로직 필요)
-    const suggestedMaterials = [
-      {
-        name: "PLA (Polylactic Acid)",
-        description: "옥수수나 사탕수수에서 추출한 생분해성 플라스틱",
-        category: "생분해성 폴리머",
-        applications: ["식품 포장재", "의료용 임플란트", "3D 프린팅"],
-        properties: {
-          biodegradable: true,
-          biocompatible: true,
-        }
-      },
-      {
-        name: "키토산 (Chitosan)",
-        description: "갑각류 껍질에서 추출한 천연 항균 소재",
-        category: "천연 폴리머",
-        applications: ["상처 치료", "식품 보존", "수처리"],
-        properties: {
-          biodegradable: true,
-          biocompatible: true,
-        }
-      },
-      {
-        name: "세포벽 기반 나노섬유",
-        description: "식물 세포벽에서 추출한 강화 섬유 소재",
-        category: "나노 소재",
-        applications: ["복합재료", "포장재", "바이오필름"],
-        properties: {
-          biodegradable: true,
-          biocompatible: true,
-        }
-      }
-    ];
-
+    // AI 응답을 기반으로 추천 소재 목록을 생성해야 하지만, 
+    // 여기서는 AI가 생성한 텍스트 응답을 그대로 사용하고, 추천 소재는 fallback으로 처리합니다.
     return {
       query,
       response: geminiResponse,
-      materials: suggestedMaterials
+      materials: getRelevantFallbackMaterials(query) // AI 응답 파싱이 복잡하므로 fallback 유지
     };
-
+  
   } catch (error) {
     console.error('Gemini API Error:', error);
     
@@ -200,13 +167,10 @@ export async function searchWithGemini(query: string): Promise<SearchResult> {
     // 에러 시 기본 응답 반환
     return {
       query,
-      response: `"${query}"에 대한 AI 검색을 수행했습니다.
-
-**검색 결과 요약:**
-이 검색어와 관련된 바이오소재들을 분석하고 있습니다. 아래 추천 소재들을 참고하시거나, 다른 검색어로 시도해보세요.
+      response: `"${query}"에 대한 AI 요약을 생성하는 중 오류가 발생했습니다.
 
 **AI 분석 상태:** 
-현재 Google Gemini AI가 "${query}"에 대한 전문적인 분석을 수행 중입니다. 네트워크 연결이나 API 응답에 일시적인 지연이 있을 수 있습니다.`,
+현재 Google Gemini AI가 제공된 정보를 분석하는 데 일시적인 지연이 있습니다. 아래의 원본 검색 결과를 참고해주세요.`,
       materials: getRelevantFallbackMaterials(query)
     };
   }

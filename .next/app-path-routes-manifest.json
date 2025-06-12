@@ -1,8 +1,8 @@
 {
-  "/api/crawl-bioone/route": "/api/crawl-bioone",
-  "/favicon.ico/route": "/favicon.ico",
-  "/api/test-gemini/route": "/api/test-gemini",
   "/_not-found/page": "/_not-found",
+  "/api/crawl-bioone/route": "/api/crawl-bioone",
+  "/api/test-gemini/route": "/api/test-gemini",
+  "/favicon.ico/route": "/favicon.ico",
   "/page": "/",
   "/test/page": "/test"
 }

@@ -7,6 +7,14 @@
       "static/chunks/main-app-6b7e0b226face243.js",
       "static/chunks/app/_not-found/page-a5650ad2caef29f7.js"
     ],
+    "/layout": [
+      "static/chunks/webpack-29ebadaebe2fcb3f.js",
+      "static/chunks/4bd1b696-d1df770a52915852.js",
+      "static/chunks/684-e3d71baf289cc55c.js",
+      "static/chunks/main-app-6b7e0b226face243.js",
+      "static/css/dcd62bc7664f715c.css",
+      "static/chunks/app/layout-45f3bf4f1bec279e.js"
+    ],
     "/api/crawl-bioone/route": [
       "static/chunks/webpack-29ebadaebe2fcb3f.js",
       "static/chunks/4bd1b696-d1df770a52915852.js",
@@ -21,21 +29,13 @@
       "static/chunks/main-app-6b7e0b226face243.js",
       "static/chunks/app/api/test-gemini/route-3ba215bef06e8546.js"
     ],
-    "/layout": [
-      "static/chunks/webpack-29ebadaebe2fcb3f.js",
-      "static/chunks/4bd1b696-d1df770a52915852.js",
-      "static/chunks/684-e3d71baf289cc55c.js",
-      "static/chunks/main-app-6b7e0b226face243.js",
-      "static/css/dcd62bc7664f715c.css",
-      "static/chunks/app/layout-45f3bf4f1bec279e.js"
-    ],
     "/page": [
       "static/chunks/webpack-29ebadaebe2fcb3f.js",
       "static/chunks/4bd1b696-d1df770a52915852.js",
       "static/chunks/684-e3d71baf289cc55c.js",
       "static/chunks/main-app-6b7e0b226face243.js",
       "static/chunks/778-1810aa114b089867.js",
-      "static/chunks/app/page-ad52b11b0b6aa4ec.js"
+      "static/chunks/app/page-885e2d5518689975.js"
     ],
     "/test/page": [
       "static/chunks/webpack-29ebadaebe2fcb3f.js",
