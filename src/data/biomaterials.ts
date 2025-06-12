@@ -272,6 +272,29 @@ export const sampleBiomaterials: Biomaterial[] = [
     inStock: false,
     createdAt: new Date('2024-01-19'),
     updatedAt: new Date('2024-01-26')
+  },
+  {
+    id: '11',
+    name: 'Bacillus subtilis (바실러스 서브틸리스)',
+    category: '미생물',
+    subcategory: '세균',
+    description: '토양이나 장내에 널리 존재하는 그람 양성 세균으로, 효소 생산 및 프로바이오틱스로 산업적으로 중요하게 사용됩니다.',
+    properties: {
+      biodegradable: true,
+      biocompatible: true,
+    },
+    applications: ['프로바이오틱스', '산업용 효소 생산', '고초균', '농업용 미생물', '환경 정화'],
+    suppliers: ['ATCC', 'KCTC', 'DSM'],
+    certification: ['GRAS 인증', 'Non-GMO'],
+    imageUrl: '/images/bacillus.jpg',
+    price: {
+      amount: 150000,
+      unit: 'strain당',
+      currency: 'KRW'
+    },
+    inStock: true,
+    createdAt: new Date('2024-02-01'),
+    updatedAt: new Date('2024-02-01')
   }
 ];
 

@@ -14,7 +14,10 @@ import { Search, Beaker, Shield, Recycle } from 'lucide-react';
 
 // 키워드 매칭 함수
 function checkKeywordMatches(query: string, material: Biomaterial): boolean {
+  const lowerQuery = query.toLowerCase();
+  
   const keywordMappings: { [key: string]: string[] } = {
+    'bacillus': ['bacillus', '바실러스'],
     '배양세포주': ['hela', 'cho', 'hek293', 'ipsc', '세포주', '세포', '배양', '줄기세포'],
     '세포': ['hela', 'cho', 'hek293', 'ipsc', '세포주', '배양세포주', '줄기세포'],
     '줄기세포': ['ipsc', '유도만능줄기세포', '줄기세포', '재생의학'],
@@ -26,7 +29,7 @@ function checkKeywordMatches(query: string, material: Biomaterial): boolean {
   };
 
   for (const [keyword, relatedTerms] of Object.entries(keywordMappings)) {
-    if (query.includes(keyword)) {
+    if (lowerQuery.includes(keyword)) {
       return relatedTerms.some(term => 
         material.name.toLowerCase().includes(term) ||
         material.description.toLowerCase().includes(term) ||
