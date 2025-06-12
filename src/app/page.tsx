@@ -6,9 +6,10 @@ import BiomaterialCard from '@/components/BiomaterialCard';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import AISearchResults from '@/components/AISearchResults';
-import { SearchFilters } from '@/types/biomaterial';
+import { SearchFilters, Biomaterial } from '@/types/biomaterial';
 import { sampleBiomaterials } from '@/data/biomaterials';
 import { searchWithGemini, SearchResult } from '@/lib/gemini';
+import { searchBioOne, convertBioOneTobiomaterial } from '@/lib/bioone-crawler';
 import { Search, Beaker, Shield, Recycle } from 'lucide-react';
 
 export default function Home() {
@@ -19,8 +20,12 @@ export default function Home() {
   const [aiResult, setAiResult] = useState<SearchResult | null>(null);
   const [isAiLoading, setIsAiLoading] = useState(false);
 
+  const [bioOneMaterials, setBioOneMaterials] = useState<Biomaterial[]>([]);
+  const [isLoadingBioOne, setIsLoadingBioOne] = useState(false);
+
   const filteredMaterials = useMemo(() => {
-    let results = sampleBiomaterials;
+    // 샘플 데이터와 BioOne 데이터 합치기
+    let results = [...sampleBiomaterials, ...bioOneMaterials];
 
     // 검색어 필터링
     if (searchQuery.trim()) {
@@ -29,7 +34,7 @@ export default function Home() {
         material.name.toLowerCase().includes(query) ||
         material.description.toLowerCase().includes(query) ||
         material.category.toLowerCase().includes(query) ||
-        material.applications.some(app => app.toLowerCase().includes(query))
+        material.applications.some((app: string) => app.toLowerCase().includes(query))
       );
     }
 
@@ -61,7 +66,7 @@ export default function Home() {
     }
 
     return results;
-  }, [searchQuery, filters]);
+  }, [searchQuery, filters, bioOneMaterials]);
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
@@ -70,16 +75,37 @@ export default function Home() {
     // AI 검색 시작
     if (query.trim()) {
       setIsAiLoading(true);
+      setIsLoadingBioOne(true);
+      
       try {
-        const result = await searchWithGemini(query);
-        setAiResult(result);
+        // AI 검색과 BioOne 크롤링 병렬 실행
+        const [aiResult, bioOneResult] = await Promise.all([
+          searchWithGemini(query),
+          searchBioOne(query)
+        ]);
+        
+        setAiResult(aiResult);
+        
+        // BioOne 검색 결과를 Biomaterial 형식으로 변환
+        if (bioOneResult.success && bioOneResult.data.length > 0) {
+          const convertedMaterials = bioOneResult.data.map(convertBioOneTobiomaterial);
+          setBioOneMaterials(convertedMaterials);
+          console.log(`BioOne에서 ${convertedMaterials.length}개 소재 발견`);
+        } else {
+          setBioOneMaterials([]);
+        }
+        
       } catch (error) {
-        console.error('AI search failed:', error);
+        console.error('검색 중 오류 발생:', error);
+        setAiResult(null);
+        setBioOneMaterials([]);
       } finally {
         setIsAiLoading(false);
+        setIsLoadingBioOne(false);
       }
     } else {
       setAiResult(null);
+      setBioOneMaterials([]);
     }
   };
 
@@ -173,6 +199,12 @@ export default function Home() {
                   <span className="text-gray-500">
                     &quot;{searchQuery}&quot;에 대한 결과
                   </span>
+                )}
+                {isLoadingBioOne && (
+                  <div className="flex items-center text-blue-600">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
+                    <span className="text-sm">BioOne 검색 중...</span>
+                  </div>
                 )}
               </div>
             </div>

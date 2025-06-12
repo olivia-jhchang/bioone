@@ -1,4 +1,7 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/crawl-bioone/route": "app/api/crawl-bioone/route.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/test/page": "app/test/page.js"
 }

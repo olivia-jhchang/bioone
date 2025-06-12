@@ -1,6 +1,7 @@
 {
-  "/favicon.ico/route": "/favicon.ico",
   "/_not-found/page": "/_not-found",
+  "/api/crawl-bioone/route": "/api/crawl-bioone",
+  "/favicon.ico/route": "/favicon.ico",
   "/page": "/",
   "/test/page": "/test"
 }

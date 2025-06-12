@@ -70,7 +70,7 @@ export default function SearchBar({
   className = ""
 }: SearchBarProps) {
   const [query, setQuery] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
+  const [, setIsFocused] = useState(false);
   const [currentPlaceholder, setCurrentPlaceholder] = useState(placeholder);
 
   const handleSubmit = (e: React.FormEvent) => {
