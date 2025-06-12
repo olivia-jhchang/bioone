@@ -180,6 +180,98 @@ export const sampleBiomaterials: Biomaterial[] = [
     inStock: true,
     createdAt: new Date('2024-01-14'),
     updatedAt: new Date('2024-01-20')
+  },
+  {
+    id: '7',
+    name: 'HeLa 세포주',
+    category: '배양세포주',
+    subcategory: '인간 암세포주',
+    description: '자궁경부암에서 유래한 인간 불멸화 세포주로, 생물학 연구에서 가장 널리 사용되는 세포주 중 하나입니다.',
+    properties: {
+      biodegradable: false,
+      biocompatible: true,
+    },
+    applications: ['암 연구', '세포생물학', '바이러스 연구', '약물 스크리닝', '백신 개발'],
+    suppliers: ['ATCC', 'KCLB', '한국세포주은행'],
+    certification: ['ATCC 인증', 'STR 프로파일링', 'Mycoplasma-free'],
+    imageUrl: '/images/hela.jpg',
+    price: {
+      amount: 350000,
+      unit: 'vial당',
+      currency: 'KRW'
+    },
+    inStock: true,
+    createdAt: new Date('2024-01-16'),
+    updatedAt: new Date('2024-01-23')
+  },
+  {
+    id: '8',
+    name: 'CHO 세포주',
+    category: '배양세포주',
+    subcategory: '동물 세포주',
+    description: '중국 햄스터 난소 세포에서 유래한 세포주로, 단백질 생산 및 바이오의약품 제조에 광범위하게 사용됩니다.',
+    properties: {
+      biodegradable: false,
+      biocompatible: true,
+    },
+    applications: ['단백질 생산', '바이오의약품 제조', '항체 생산', '백신 생산', '세포치료제'],
+    suppliers: ['ATCC', 'Thermo Fisher', '셀진바이오'],
+    certification: ['FDA 승인', 'GMP 적합', 'ICH 가이드라인'],
+    imageUrl: '/images/cho.jpg',
+    price: {
+      amount: 420000,
+      unit: 'vial당',
+      currency: 'KRW'
+    },
+    inStock: true,
+    createdAt: new Date('2024-01-17'),
+    updatedAt: new Date('2024-01-24')
+  },
+  {
+    id: '9',
+    name: 'HEK293 세포주',
+    category: '배양세포주',
+    subcategory: '인간 세포주',
+    description: '인간 배아 신장 세포에서 유래한 세포주로, 유전자 발현 연구와 바이러스 생산에 널리 사용됩니다.',
+    properties: {
+      biodegradable: false,
+      biocompatible: true,
+    },
+    applications: ['유전자 발현', '바이러스 생산', '단백질 발현', '형질전환 연구', '백신 개발'],
+    suppliers: ['ATCC', 'Invitrogen', '코스모진테크'],
+    certification: ['ATCC 인증', 'Mycoplasma 음성', 'STR 검증'],
+    imageUrl: '/images/hek293.jpg',
+    price: {
+      amount: 380000,
+      unit: 'vial당',
+      currency: 'KRW'
+    },
+    inStock: true,
+    createdAt: new Date('2024-01-18'),
+    updatedAt: new Date('2024-01-25')
+  },
+  {
+    id: '10',
+    name: 'iPSC (유도만능줄기세포)',
+    category: '배양세포주',
+    subcategory: '줄기세포',
+    description: '성체 세포를 역분화시켜 만든 유도만능줄기세포로, 재생의학과 질병 모델링에 혁신적인 도구입니다.',
+    properties: {
+      biodegradable: false,
+      biocompatible: true,
+    },
+    applications: ['재생의학', '질병 모델링', '약물 스크리닝', '세포치료', '조직공학'],
+    suppliers: ['RIKEN', 'Thermo Fisher', '차바이오텍'],
+    certification: ['GMP 등급', 'Pluripotency 검증', 'Karyotype 정상'],
+    imageUrl: '/images/ipsc.jpg',
+    price: {
+      amount: 850000,
+      unit: 'vial당',
+      currency: 'KRW'
+    },
+    inStock: false,
+    createdAt: new Date('2024-01-19'),
+    updatedAt: new Date('2024-01-26')
   }
 ];
 
@@ -189,7 +281,8 @@ export const biomaterialCategories = [
   '하이드로겔',
   '바이오세라믹',
   '금속 생체재료',
-  '복합재료'
+  '복합재료',
+  '배양세포주'
 ];
 
 export const biomaterialApplications = [

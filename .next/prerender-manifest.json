@@ -30,30 +30,6 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/test": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/test",
-      "dataRoute": "/test.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
     "/": {
       "experimentalBypassFor": [
         {
@@ -77,13 +53,37 @@
         "x-next-revalidated-tags",
         "x-next-revalidate-tag-token"
       ]
+    },
+    "/test": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/test",
+      "dataRoute": "/test.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
     }
   },
   "dynamicRoutes": {},
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "27f9345e695c5585f6839fae90d4502d",
-    "previewModeSigningKey": "ea1b3fa55fc9c61ec7a31648815202b6ddfd11c6924ec997de032b3f9ba5551e",
-    "previewModeEncryptionKey": "c0f1451a04b8e184afbb9c43929e292e0ff6f627284fd3a979e53b92b02f9d1d"
+    "previewModeId": "df41a70ac8026b2253f1f028d037ab90",
+    "previewModeSigningKey": "f99519e73ef0a556a612f2a056a6bf734b04f90fa80a6b506ad06b06fae1e793",
+    "previewModeEncryptionKey": "9775bb5f806503f3f078f112413177b8502eadb262ce9a005ba20a47f1efa079"
   }
 }

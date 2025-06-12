@@ -12,6 +12,33 @@ import { searchWithGemini, SearchResult } from '@/lib/gemini';
 import { searchBioOne, convertBioOneTobiomaterial } from '@/lib/bioone-crawler';
 import { Search, Beaker, Shield, Recycle } from 'lucide-react';
 
+// 키워드 매칭 함수
+function checkKeywordMatches(query: string, material: Biomaterial): boolean {
+  const keywordMappings: { [key: string]: string[] } = {
+    '배양세포주': ['hela', 'cho', 'hek293', 'ipsc', '세포주', '세포', '배양', '줄기세포'],
+    '세포': ['hela', 'cho', 'hek293', 'ipsc', '세포주', '배양세포주', '줄기세포'],
+    '줄기세포': ['ipsc', '유도만능줄기세포', '줄기세포', '재생의학'],
+    '플라스틱': ['pla', 'pcl', '폴리락트산', '폴리카프로락톤', '생분해성'],
+    '콜라겐': ['콜라겐', '상처치료', '피부재생', '단백질'],
+    '키토산': ['키토산', '항균', '갑각류', '다당류'],
+    '하이드로겔': ['하이드로겔', 'peg', '수분', '조직공학'],
+    '바이오세라믹': ['하이드록시아파타이트', '세라믹', '임플란트', '정형외과']
+  };
+
+  for (const [keyword, relatedTerms] of Object.entries(keywordMappings)) {
+    if (query.includes(keyword)) {
+      return relatedTerms.some(term => 
+        material.name.toLowerCase().includes(term) ||
+        material.description.toLowerCase().includes(term) ||
+        material.category.toLowerCase().includes(term) ||
+        material.subcategory?.toLowerCase().includes(term)
+      );
+    }
+  }
+  
+  return false;
+}
+
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filters, setFilters] = useState<SearchFilters>({});
@@ -30,12 +57,20 @@ export default function Home() {
     // 검색어 필터링
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      results = results.filter(material =>
-        material.name.toLowerCase().includes(query) ||
-        material.description.toLowerCase().includes(query) ||
-        material.category.toLowerCase().includes(query) ||
-        material.applications.some((app: string) => app.toLowerCase().includes(query))
-      );
+      results = results.filter(material => {
+        const nameMatch = material.name.toLowerCase().includes(query);
+        const descriptionMatch = material.description.toLowerCase().includes(query);
+        const categoryMatch = material.category.toLowerCase().includes(query);
+        const subcategoryMatch = material.subcategory?.toLowerCase().includes(query);
+        const applicationMatch = material.applications.some((app: string) => 
+          app.toLowerCase().includes(query)
+        );
+        
+        // 더 정확한 매칭을 위한 키워드 매핑
+        const keywordMatches = checkKeywordMatches(query, material);
+        
+        return nameMatch || descriptionMatch || categoryMatch || subcategoryMatch || applicationMatch || keywordMatches;
+      });
     }
 
     // 카테고리 필터링

@@ -1,6 +1,7 @@
 {
-  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/api/crawl-bioone/route": "app/api/crawl-bioone/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/api/test-gemini/route": "app/api/test-gemini/route.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
   "/test/page": "app/test/page.js"
