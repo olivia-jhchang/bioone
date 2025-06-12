@@ -26,49 +26,30 @@ export default function HeroSection({ onSearch }: HeroSectionProps) {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0">
-        {/* Top left sphere */}
-        <div className="absolute top-20 left-20 w-80 h-80 rounded-full bg-gradient-to-br from-purple-400/30 to-purple-600/30 blur-sm"></div>
-        
-        {/* Bottom right molecular structure */}
-        <div className="absolute bottom-0 right-0 w-96 h-96 opacity-30">
-          <svg viewBox="0 0 400 400" className="w-full h-full">
-            <defs>
-              <pattern id="molecule" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                <circle cx="20" cy="20" r="3" fill="rgba(255,255,255,0.3)"/>
-              </pattern>
-            </defs>
-            <rect width="400" height="400" fill="url(#molecule)"/>
-            {/* Molecular connections */}
-            <g stroke="rgba(255,255,255,0.2)" strokeWidth="1">
-              <line x1="50" y1="50" x2="150" y2="100"/>
-              <line x1="150" y1="100" x2="250" y2="80"/>
-              <line x1="250" y1="80" x2="350" y2="150"/>
-              <line x1="100" y1="200" x2="200" y2="250"/>
-              <line x1="200" y1="250" x2="300" y2="200"/>
-            </g>
-          </svg>
-        </div>
-
-        {/* Bottom left organic structure */}
-        <div className="absolute bottom-0 left-0 w-80 h-80 opacity-20">
-          <div className="w-full h-full bg-gradient-to-t from-purple-400/40 to-transparent rounded-t-full transform rotate-12"></div>
-        </div>
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Background Image with Animation */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-zoom-in"
+        style={{
+          backgroundImage: 'url(/main-visual-2.jpg)',
+          transformOrigin: 'center center'
+        }}
+      >
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-blue-900/30 to-purple-800/40"></div>
       </div>
 
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center text-white">
         {/* Logo and title */}
         <div className="mb-8">
-                  <div className="flex items-center justify-center mb-4">
-          <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mr-4 backdrop-blur-sm">
-            <span className="text-white font-bold text-2xl">A</span>
+          <div className="flex items-center justify-center mb-4">
+            <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mr-4 backdrop-blur-sm">
+              <span className="text-white font-bold text-2xl">A</span>
+            </div>
+            <h1 className="text-5xl font-bold">All in One</h1>
           </div>
-          <h1 className="text-5xl font-bold">All in One</h1>
-        </div>
-        <h2 className="text-3xl font-medium mb-4">바이오소재 정보 AI 통합플랫폼</h2>
+          <h2 className="text-3xl font-medium mb-4">바이오소재 정보 AI 통합플랫폼</h2>
         </div>
 
         {/* Search section */}
@@ -83,7 +64,7 @@ export default function HeroSection({ onSearch }: HeroSectionProps) {
             <div className="flex items-center justify-center space-x-4">
               <button
                 onClick={prevSuggestion}
-                className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors"
+                className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm"
               >
                 <ChevronLeft className="w-4 h-4 text-white" />
               </button>
@@ -93,9 +74,9 @@ export default function HeroSection({ onSearch }: HeroSectionProps) {
                   <button
                     key={index}
                     onClick={() => onSearch(suggestion)}
-                    className={`px-4 py-2 rounded-full text-sm transition-colors ${
+                    className={`px-4 py-2 rounded-full text-sm transition-colors backdrop-blur-sm ${
                       index === currentSuggestion
-                        ? 'bg-purple-600 text-white'
+                        ? 'bg-purple-600/80 text-white'
                         : 'bg-white/20 text-white hover:bg-white/30'
                     }`}
                   >
@@ -106,7 +87,7 @@ export default function HeroSection({ onSearch }: HeroSectionProps) {
               
               <button
                 onClick={nextSuggestion}
-                className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors"
+                className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm"
               >
                 <ChevronRight className="w-4 h-4 text-white" />
               </button>
