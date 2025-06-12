@@ -70,6 +70,8 @@ export default function SearchBar({
   className = ""
 }: SearchBarProps) {
   const [query, setQuery] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  const [currentPlaceholder, setCurrentPlaceholder] = useState(placeholder);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,6 +85,18 @@ export default function SearchBar({
   const handleFilterClick = () => {
     // 필터 기능 구현 (추후)
     console.log('Filter clicked');
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    setCurrentPlaceholder('');
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    if (query === '') {
+      setCurrentPlaceholder(placeholder);
+    }
   };
 
   return (
@@ -102,7 +116,9 @@ export default function SearchBar({
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder={placeholder}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    placeholder={currentPlaceholder}
                     className="w-full bg-transparent border-none outline-none text-[#333333] text-[22px] font-bold placeholder-[#333333] leading-normal"
                     style={{ fontFamily: 'Pretendard, sans-serif' }}
                   />
